@@ -1,41 +1,47 @@
 const axios = require("axios");
-const { Driver } = require("../db");
+const { Driver, Team } = require("../db");
 
-const getUserDB = async () => {
-  const allUsers = await Driver.findAll();
-  return allUsers;
+const getDriverDB = async () => {
+  const allDriver = await Driver.findAll({
+    include: {
+      model: Team,
+      attributes: ["id", "teams"],
+    },
+  });
+  return allDriver;
 };
 
-const getUserApi = async () => {
+const getDriverApi = async () => {
   const peticion = (await axios("http://localhost:5000/drivers")).data;
-  const apiInfoMap = peticion.map((user) => {
+  const apiInfoMap = peticion.map((driver) => {
     return {
-      id: user.id,
-      forename: user.name.forename,
-      surname: user.name.surname,
-      description: user.description,
-      image: user.image.url,
-      nationality: user.nationality,
-      dob: user.dob,
+      id: driver.id,
+      forename: driver.name.forename,
+      surname: driver.name.surname,
+      description: driver.description,
+      image: driver.image.url,
+      nationality: driver.nationality,
+      dob: driver.dob,
+      teams: driver.teams,
     };
   });
   return apiInfoMap;
 };
 
 const getNameController = async (forename) => {
-  const usersDB = await getUserDB(); //todos los usuarios de la DB
-  const usersApi = await getUserApi(); //todos los usuarios de la API
-  const allUsers = [...usersDB, ...usersApi]; //todos los USUARIOS
+  const driverDB = await getDriverDB(); //todos los usuarios de la DB
+  const driverApi = await getDriverApi(); //todos los usuarios de la API
+  const allDrivers = [...driverDB, ...driverApi]; //todos los USUARIOS
   if (forename) {
-    let filterUsers = allUsers.filter((user) =>
-      user.forename.toLowerCase().includes(forename.toLowerCase())
+    let filterDriver = allDrivers.filter((driver) =>
+      driver.forename.toLowerCase().includes(forename.toLowerCase())
     );
-    if (filterUsers.length) {
-      return filterUsers;
+    if (filterDriver.length) {
+      return filterDriver;
     }
   } else {
-    return allUsers;
+    return allDrivers;
   }
 };
 
-module.exports= {getNameController};
+module.exports = { getNameController };
