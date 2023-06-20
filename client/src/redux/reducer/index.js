@@ -1,4 +1,4 @@
-import { GET_DETAIL, GET_DRIVERS ,CLEAN_DETAIL} from "../action";
+import { GET_DETAIL, GET_DRIVERS ,CLEAN_DETAIL, GET_DRIVERS_BY_NAME} from "../action";
 
 let initialState = {
   allDrivers: [],
@@ -17,6 +17,11 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           detail: action.payload, // [Drivers]
+        };
+        case GET_DRIVERS_BY_NAME:
+        return {
+          ...state,
+          allDrivers: action.payload, // search
         };
         case CLEAN_DETAIL:
         return {

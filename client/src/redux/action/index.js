@@ -4,6 +4,7 @@ export const GET_DRIVERS = "GET_DRIVERS";
 export const POST_DRIVERS = "POST_DRIVERS";
 export const GET_DETAIL = "GET_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
+export const GET_DRIVERS_BY_NAME= "GET_DRIVERS_BY_NAME"
 
 export const getDrivers = () => {
   return async function (dispatch) {
@@ -15,7 +16,7 @@ export const getDrivers = () => {
         payload: response.data,
       });
     } catch (error) {
-      error;
+      throw new Error(error);
     }
   };
 };
@@ -39,6 +40,20 @@ export const postDrivers = (info) => {
     try {
       const response = await axios.post("http://localhost:3001/drivers", info);
       alert("Corredor creado");
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+};
+
+export const getDriversByName = (forename) => {
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(`http://localhost:3001/drivers/?forename=${forename}`);
+      return dispatch({
+        type: GET_DRIVERS_BY_NAME,
+        payload: response.data,
+      });
     } catch (error) {
       alert(error.response.data.error);
     }
