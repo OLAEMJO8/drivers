@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { postDrivers } from "../../redux/action";
 import { Link } from "react-router-dom";
 import "./create.css";
+
 function Create() {
   const dispatch = useDispatch();
   const [state, setState] = useState({
@@ -25,11 +26,13 @@ function Create() {
   });
 
   const validate = (input, name) => {
+
     if (name === "forename") {
       setErrors({
         ...errors,
         forename: input.forename !== "" ? "" : "Nombre requerido",
       });
+      
     }
     if (name === "surname") {
       setErrors({
@@ -49,22 +52,26 @@ function Create() {
     event.preventDefault();
     dispatch(postDrivers(state));
   };
+
   const handleChange = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+
     validate(
       {
         ...state,
-        [event.target.name]: event.target.value,
+        [name]: value,
       },
-      event.target.name
+      name
     );
   };
 
   return (
     <div className="body">
+      {console.log(state)}
       <form onSubmit={handleSubmit}>
         <div className="home">
           <Link to="/home">Home</Link>
@@ -87,18 +94,22 @@ function Create() {
         <div>
           <label>Imagen</label>
           <input type="url" name="image" onChange={handleChange} />
+          {errors.image && <span>{errors.image}</span>}
         </div>
         <div>
           <label>Fecha de Nacimiento</label>
-          <input type="text" name="dob" onChange={handleChange} />
+          <input type="date" name="dob" onChange={handleChange} />
+          {errors.dob && <span>{errors.dob}</span>}
         </div>
         <div>
           <label>Descripcion</label>
           <input type="text" name="description" onChange={handleChange} />
+          {errors.description && <span>{errors.description}</span>}
         </div>
         <div>
           <label>Equipos</label>
           <input type="text" name="teams" onChange={handleChange} />
+          {errors.teams && <span>{errors.teams}</span>}
         </div>
         <div>
           <button type="submit">Enviar</button>

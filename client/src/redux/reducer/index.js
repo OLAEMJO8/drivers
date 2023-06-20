@@ -1,8 +1,9 @@
-import { GET_DETAIL, GET_DRIVERS } from "../action";
+import { GET_DETAIL, GET_DRIVERS ,CLEAN_DETAIL} from "../action";
 
 let initialState = {
   allDrivers: [],
-  detail:[]
+  detail:[],
+  clear:{},
 };
 
 function rootReducer(state = initialState, action) {
@@ -17,7 +18,11 @@ function rootReducer(state = initialState, action) {
           ...state,
           detail: action.payload, // [Drivers]
         };
-  
+        case CLEAN_DETAIL:
+        return {
+          ...state,
+          clean: action.payload, // Limpiar el detalle
+        };
 
     default:
       return state;

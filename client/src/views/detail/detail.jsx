@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { getDetail } from "./../../redux/action/index";
+import { Link, useParams } from "react-router-dom";
+import { getDetail , cleanDetail} from "./../../redux/action/index";
 import "./detail.css";
 function Detail() {
   const { id } = useParams();
@@ -9,16 +9,28 @@ function Detail() {
   const detail = useSelector((state) => state.detail);
 
   useEffect(() => {
-    dispatch(getDetail(id));
-  }, [dispatch, id]);
+  
+      dispatch(getDetail(id));
+    
+  }, [dispatch]);
+
+  useEffect(()=> {
+    return ()=> dispatch(cleanDetail())
+},[])
 
   return (
+    <div>
+
+      <div >
+          <Link to="/home">Home</Link>
+        </div>
     <div className="detail">
-      {detail && (
+      {detail.hasOwnProperty("name") && (
         <div>
           <h2>
             {detail.name.forename} {detail.name.surname}
           </h2>
+          <img className="img" src={detail.image.url} alt="Driver" />
           <ul>
             <li>{detail.nationality}</li>
             <li>{detail.dob}</li>
@@ -26,9 +38,9 @@ function Detail() {
           </ul>
 
           <p>{detail.description}</p>
-          <img className="img" src={detail.image.url} alt="Driver" />
         </div>
       )}
+    </div>
     </div>
   );
 }
