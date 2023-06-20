@@ -12,7 +12,10 @@ const getDriverDB = async () => {
 };
 
 const getDriverApi = async () => {
-  const peticion = (await axios("http://localhost:5000/drivers")).data;
+  const peticion = (
+    await axios(`http://localhost:5000/drivers?limit=15`)
+  ).data.slice(0, 15);
+
   const apiInfoMap = peticion.map((driver) => {
     return {
       id: driver.id,

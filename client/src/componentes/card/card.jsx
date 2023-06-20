@@ -1,15 +1,20 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import "./card.css"
 
-function Cards() {
-    return (
+function Cards({ driver }) {
+  const {id, forename, surname,  image, teams } = driver;
+  return (
+    <div className="card">
+      <Link to={`/driver/${id}`} className="text" >
+        <h2>{forename} {surname}</h2>
         <div>
-           <Link>
-           <h2>Nombre</h2>
-           <h3>Imagen</h3>
-           <h3>Equipo</h3>
-           </Link> 
+        <img src={image} alt={`${forename}`} className="img" />
         </div>
-    );
+        <h2>Equipo:</h2>
+        <h3>{teams}</h3>
+      </Link>
+    </div>
+  );
 }
 
 export default Cards;

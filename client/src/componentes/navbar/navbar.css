@@ -1,0 +1,12 @@
+.nav-container {
+  background-color: rgb(216, 196, 196);
+  height: 4rem;
+  display: flex;
+}
+
+.link-container {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  margin: 1rem;
+}
