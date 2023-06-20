@@ -63,6 +63,6 @@ export const getDriversByName = (forename) => {
 export const cleanDetail = () => {
   return {
     type: "CLEAN_DETAIL",
-    payload: {},
+    payload: [],
   };
 };
