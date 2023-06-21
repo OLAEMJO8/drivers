@@ -28,7 +28,7 @@ const getDriverApi = async () => {
         forename: driver.name.forename,
         surname: driver.name.surname,
         description: driver.description,
-        image: driver.image.url,
+        image: driver.image.url || "http://bit.ly/3XlUDxl",
         nationality: driver.nationality,
         dob: driver.dob,
         teams: driver.teams,
