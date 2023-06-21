@@ -45,6 +45,7 @@ const getNameController = async (forename) => {
     const driverDB = await getDriverDB(); //todos los usuarios de la DB
     const driverApi = await getDriverApi(); //todos los usuarios de la API
     const allDrivers = [...driverDB, ...driverApi]; //todos los USUARIOS
+
     if (forename) {
       let filterDriver = allDrivers.filter((driver) =>
         driver.forename.toLowerCase().includes(forename.toLowerCase())

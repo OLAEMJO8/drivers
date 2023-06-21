@@ -43,7 +43,7 @@ export const postDrivers = (info) => {
       const response = await axios.post("http://localhost:3001/drivers", info);
       alert("Corredor creado");
     } catch (error) {
-      throw new Error(error);
+      alert("Faltan datos");
     }
   };
 };
@@ -88,4 +88,3 @@ export const filtradoPorDriver = (teams) => {
     payload: teams,
   };
 };
-

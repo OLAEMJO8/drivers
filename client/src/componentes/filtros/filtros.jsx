@@ -1,9 +1,6 @@
 import React from "react";
 
 function Filtros({ handleSortName, handleSortDob, handleFilter, allDrivers }) {
-
-
-    
   const uniqueTeams = allDrivers
     .flatMap((driver) => driver.teams.split(",").map((team) => team.trim()))
     .filter((team, index, teams) => teams.indexOf(team) === index);
