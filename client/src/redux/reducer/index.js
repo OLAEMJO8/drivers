@@ -5,9 +5,8 @@ import {
   GET_DRIVERS_BY_NAME,
   ORDER_NAME,
   ORDER_DOB,
-  FILTRO_POR_DRIVER
+  FILTRO_POR_DRIVER,
 } from "../action";
-
 
 let initialState = {
   allDrivers: [],
@@ -62,14 +61,15 @@ function rootReducer(state = initialState, action) {
         allDrivers: sortedDriversDob,
       };
 
-      case FILTRO_POR_DRIVER:
-        const filtro = [...state.allDrivers].filter((driver)=> driver.teams.includes(action.payload))
-        console.log(filtro);
-        return {
-          ...state,
-          allDrivers: filtro,
-        };
-      
+    case FILTRO_POR_DRIVER:
+      const filtro = Object.values(state.allDrivers).filter((driver) =>
+        driver.teams?.includes(action.payload)
+      );
+
+      return {
+        ...state,
+        allDrivers: filtro,
+      };
 
     default:
       return state;

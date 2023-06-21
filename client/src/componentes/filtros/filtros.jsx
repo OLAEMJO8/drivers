@@ -1,10 +1,14 @@
+import { all } from "axios";
 import React from "react";
 
 function Filtros({ handleSortName, handleSortDob, handleFilter, allDrivers }) {
-  const uniqueTeams = allDrivers
-    .flatMap((driver) => driver.teams.split(",").map((team) => team.trim()))
+  const uniqueTeams = Object.values(allDrivers)
+    .flatMap((driver) => {
+      return (driver.teams?.split(",") ?? []).map((team) => team.trim());
+    })
     .filter((team, index, teams) => teams.indexOf(team) === index);
 
+  console.log(allDrivers);
   return (
     <div>
       <label>

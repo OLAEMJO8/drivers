@@ -1,11 +1,31 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { postDrivers } from "../../redux/action";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getDrivers, postDrivers } from "../../redux/action";
 import { Link } from "react-router-dom";
 import "./create.css";
 
 function Create() {
+  const allDrivers = useSelector((s) => s.allDrivers);
+  useEffect(() => {
+    dispatch(getDrivers());
+  }, []);
+  const checkList = Object.values(allDrivers)
+    .flatMap((driver) => {
+      return (driver.teams?.split(",") ?? []).map((team) => team.trim());
+    })
+    .filter((team, index, teams) => teams.indexOf(team) === index);
+
   const dispatch = useDispatch();
+  const [isChecked, setIsChecked] = useState({});
+
+  const handleCheckboxChange = (event) => {
+    const option = event.target.value;
+    setIsChecked((prevChecked) => ({
+      ...prevChecked,
+      [option]: !prevChecked[option],
+    }));
+  };
+
   const [state, setState] = useState({
     forename: "",
     surname: "",
@@ -26,13 +46,11 @@ function Create() {
   });
 
   const validate = (input, name) => {
-
     if (name === "forename") {
       setErrors({
         ...errors,
         forename: input.forename !== "" ? "" : "Nombre requerido",
       });
-      
     }
     if (name === "surname") {
       setErrors({
@@ -71,7 +89,6 @@ function Create() {
 
   return (
     <div className="body">
-      {console.log(state)}
       <form onSubmit={handleSubmit}>
         <div className="home">
           <Link to="/home">Home</Link>
@@ -107,9 +124,19 @@ function Create() {
           {errors.description && <span>{errors.description}</span>}
         </div>
         <div>
-          <label>Equipos</label>
-          <input type="text" name="teams" onChange={handleChange} />
-          {errors.teams && <span>{errors.teams}</span>}
+          {checkList.map((option) => (
+            <label key={option}>
+              <input
+                type="checkbox"
+                checked={isChecked[option] || false}
+                onChange={handleCheckboxChange}
+                value={option}
+              />
+              {option}
+            </label>
+          ))}
+
+          <p>Estado: {isChecked ? "Marcado" : "No marcado"}</p>
         </div>
         <div>
           <button type="submit">Enviar</button>
