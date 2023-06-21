@@ -4,8 +4,9 @@ export const GET_DRIVERS = "GET_DRIVERS";
 export const POST_DRIVERS = "POST_DRIVERS";
 export const GET_DETAIL = "GET_DETAIL";
 export const CLEAN_DETAIL = "CLEAN_DETAIL";
-export const GET_DRIVERS_BY_NAME= "GET_DRIVERS_BY_NAME"
-
+export const GET_DRIVERS_BY_NAME = "GET_DRIVERS_BY_NAME";
+export const ORDER_NAME = "ORDER_NAME";
+export const ORDER_DOB = "ORDER_DOB";
 export const getDrivers = () => {
   return async function (dispatch) {
     try {
@@ -25,7 +26,7 @@ export const getDetail = (id) => {
   return async function (dispatch) {
     try {
       let driverId = await axios(`http://localhost:3001/drivers/${id}`);
-    
+
       return dispatch({
         type: GET_DETAIL,
         payload: driverId.data,
@@ -49,7 +50,9 @@ export const postDrivers = (info) => {
 export const getDriversByName = (forename) => {
   return async function (dispatch) {
     try {
-      const response = await axios.get(`http://localhost:3001/drivers/?forename=${forename}`);
+      const response = await axios.get(
+        `http://localhost:3001/drivers/?forename=${forename}`
+      );
       return dispatch({
         type: GET_DRIVERS_BY_NAME,
         payload: response.data,
@@ -66,3 +69,15 @@ export const cleanDetail = () => {
     payload: [],
   };
 };
+export function ordenarPorName(payload) {
+  return {
+    type: "ORDER_NAME",
+    payload,
+  };
+}
+export function ordenarDob(dob) {
+  return {
+    type: "ORDER_DOB",
+    payload: dob,
+  };
+}
