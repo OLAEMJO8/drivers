@@ -16,9 +16,9 @@ import Filtros from "../../componentes/filtros/filtros";
 
 function Home() {
   const dispatch = useDispatch();
+  const backUp = useSelector((state) => state.backUp);
   const allDrivers = useSelector((state) => state.allDrivers);
   const [search, setSearch] = useState("");
-
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(9);
 
@@ -53,8 +53,7 @@ function Home() {
     dispatch(ordenarDob(e.target.value));
   };
   const handleFilter = (e) => {
-    e.preventDefault();
-
+    e.preventDefault(),
     dispatch(filtradoPorDriver(e.target.value));
   };
 
@@ -65,10 +64,11 @@ function Home() {
       </div>
       <div>
         <Filtros
-          allDrivers={allDrivers}
+          allDrivers={backUp}
           handleFilter={handleFilter}
           handleSortName={handleSortName}
           handleSortDob={handleSortDob}
+
         />
       </div>
       <div>

@@ -1,11 +1,13 @@
 const { Driver } = require("../db");
-const {postDriversController} = require("../controllers/postDriversController");
+const {
+  postDriversController,
+} = require("../controllers/postDriversController");
 
 //!4
 const postDriversHandler = async (req, res) => {
-  const { id, forename, surname, description, image, nationality, dob } =
-    req.body;
   try {
+    const { id, forename, surname, description, image, nationality, dob, teams } =
+      req.body;
     const response = await postDriversController(
       id,
       forename,
@@ -13,7 +15,8 @@ const postDriversHandler = async (req, res) => {
       description,
       image,
       nationality,
-      dob
+      dob,
+      teams
     );
 
     res.status(201).json(response);
@@ -22,4 +25,4 @@ const postDriversHandler = async (req, res) => {
   }
 };
 
-module.exports = {postDriversHandler};
+module.exports = { postDriversHandler };

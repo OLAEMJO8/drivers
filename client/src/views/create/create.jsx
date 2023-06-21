@@ -64,6 +64,25 @@ function Create() {
         nationality: input.nationality !== "" ? "" : "Nacionalidad requerida",
       });
     }
+    if (name === "image") {
+      setErrors({
+        ...errors,
+        image: input.image !== "" ? "" : "Imagen requerida",
+      });
+      
+    }
+    if (name === "dob") {
+      setErrors({
+        ...errors,
+        dob: input.dob !== "" ? "" : "Fecha requerida",
+      });
+    }
+    if (name === "description") {
+      setErrors({
+        ...errors,
+        description: input.description !== "" ? "" : "Descripcion",
+      });
+    }
   };
 
   const handleSubmit = (event) => {

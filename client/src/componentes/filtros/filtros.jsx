@@ -32,7 +32,7 @@ function Filtros({ handleSortName, handleSortDob, handleFilter, allDrivers }) {
           {uniqueTeams.map((team, index) => (
             <option key={index} value={team}>
               {team}
-            </option>
+            </option> 
           ))}
         </select>
       </label>

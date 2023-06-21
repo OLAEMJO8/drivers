@@ -1,4 +1,3 @@
-
 const { Driver } = require("../db");
 
 const postDriversController = async (
@@ -8,7 +7,8 @@ const postDriversController = async (
   description,
   image,
   nationality,
-  dob
+  dob,
+  teams
 ) => {
   const createDriver = await Driver.create({
     id,
@@ -18,8 +18,9 @@ const postDriversController = async (
     image,
     nationality,
     dob,
+    teams,
   });
   return createDriver;
 };
 
-module.exports = {postDriversController};
+module.exports = { postDriversController };

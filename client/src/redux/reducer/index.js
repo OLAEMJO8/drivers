@@ -14,6 +14,7 @@ let initialState = {
   detail: [],
   clean: [],
   // drivers: [],
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -22,6 +23,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allDrivers: action.payload, // [Drivers]
+        backUp: action.payload,
       };
     case GET_DETAIL:
       return {
