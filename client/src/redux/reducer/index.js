@@ -5,7 +5,9 @@ import {
   GET_DRIVERS_BY_NAME,
   ORDER_NAME,
   ORDER_DOB,
+  FILTRO_POR_DRIVER
 } from "../action";
+
 
 let initialState = {
   allDrivers: [],
@@ -41,26 +43,33 @@ function rootReducer(state = initialState, action) {
     case ORDER_NAME:
       const sortedDrivers = [...state.allDrivers].sort((a, b) => {
         return action.payload === "a-z"
-        ? a.forename.localeCompare(b.forename)
-        : b.forename.localeCompare(a.forename);
-  
+          ? a.forename.localeCompare(b.forename)
+          : b.forename.localeCompare(a.forename);
       });
       return {
         ...state,
         allDrivers: sortedDrivers,
       };
 
-      case ORDER_DOB:
-        const sortedDriversDob = [...state.allDrivers].sort((a, b) => {
-          return action.payload === "asc"
+    case ORDER_DOB:
+      const sortedDriversDob = [...state.allDrivers].sort((a, b) => {
+        return action.payload === "asc"
           ? a.dob.localeCompare(b.dob)
           : b.dob.localeCompare(a.dob);
-    
-        });
+      });
+      return {
+        ...state,
+        allDrivers: sortedDriversDob,
+      };
+
+      case FILTRO_POR_DRIVER:
+        const filtro = [...state.allDrivers].filter((driver)=> driver.teams.includes(action.payload))
+        console.log(filtro);
         return {
           ...state,
-          allDrivers: sortedDriversDob,
+          allDrivers: filtro,
         };
+      
 
     default:
       return state;

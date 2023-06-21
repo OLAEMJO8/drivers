@@ -7,6 +7,7 @@ export const CLEAN_DETAIL = "CLEAN_DETAIL";
 export const GET_DRIVERS_BY_NAME = "GET_DRIVERS_BY_NAME";
 export const ORDER_NAME = "ORDER_NAME";
 export const ORDER_DOB = "ORDER_DOB";
+export const FILTRO_POR_DRIVER = "FILTRO_POR_DRIVER";
 export const getDrivers = () => {
   return async function (dispatch) {
     try {
@@ -81,3 +82,10 @@ export function ordenarDob(dob) {
     payload: dob,
   };
 }
+export const filtradoPorDriver = (teams) => {
+  return {
+    type: "FILTRO_POR_DRIVER",
+    payload: teams,
+  };
+};
+

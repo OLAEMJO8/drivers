@@ -1,4 +1,11 @@
-import { getDrivers, getDriversByName, cleanDetail, ordenarPorName, ordenarDob } from "../../redux/action";
+import {
+  getDrivers,
+  getDriversByName,
+  cleanDetail,
+  ordenarPorName,
+  ordenarDob,
+  filtradoPorDriver,
+} from "../../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import Cardlist from "../../componentes/cardlist/cardlist";
 import Navbar from "../../componentes/navbar/navbar";
@@ -18,6 +25,8 @@ function Home() {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = allDrivers.slice(firstPostIndex, lastPostIndex);
+
+  
 
   useEffect(() => {
     if (!allDrivers.length) {
@@ -40,10 +49,17 @@ function Home() {
   const handleSortName = (e) => {
     e.preventDefault();
     dispatch(ordenarPorName(e.target.value));
+  
   };
   const handleSortDob = (e) => {
     e.preventDefault();
     dispatch(ordenarDob(e.target.value));
+    
+  };
+  const handleFilter = (e) => {
+    e.preventDefault();
+    dispatch(filtradoPorDriver(e.target.value));
+    
   };
 
   return (
@@ -51,9 +67,14 @@ function Home() {
       <div className="navbar">
         <Navbar handleSubmit={handleSubmit} handleChange={handleChange} />
       </div>
-<div>
-  <Filtros handleSortName={handleSortName} handleSortDob={handleSortDob}/>
-</div>
+      <div>
+        <Filtros
+          allDrivers={allDrivers}
+          handleFilter={handleFilter}
+          handleSortName={handleSortName}
+          handleSortDob={handleSortDob}
+        />
+      </div>
       <div>
         <Paginado
           totalPosts={allDrivers.length}
