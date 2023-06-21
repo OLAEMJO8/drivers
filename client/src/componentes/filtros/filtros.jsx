@@ -1,17 +1,15 @@
-// import { all } from "axios";
-import React from "react";
+import "./filtros.css";
 
 function Filtros({ handleSortName, handleSortDob, handleFilter, allDrivers }) {
-  const uniqueTeams = Object.values(allDrivers)
+  const uniqueTeams = allDrivers
     .flatMap((driver) => {
       return (driver.teams?.split(",") ?? []).map((team) => team.trim());
     })
     .filter((team, index, teams) => teams.indexOf(team) === index);
 
-  console.log(allDrivers);
   return (
-    <div>
-      <label>
+    <div className="filtros">
+      <label className="button">
         Order name:
         <select className="select" onChange={handleSortName}>
           <option value="none">None</option>
@@ -19,7 +17,7 @@ function Filtros({ handleSortName, handleSortDob, handleFilter, allDrivers }) {
           <option value="z-a">z-a</option>
         </select>
       </label>
-      <label>
+      <label className="button">
         Order nacimiento:
         <select className="select" onChange={handleSortDob}>
           <option value="none">None</option>
@@ -27,9 +25,9 @@ function Filtros({ handleSortName, handleSortDob, handleFilter, allDrivers }) {
           <option value="dec">dec</option>
         </select>
       </label>
-      <label>
+      <label className="button">
         Filtro team
-        <select onChange={handleFilter}>
+        <select className="select" onChange={handleFilter}>
           <option value="allDrivers">All</option>
           {uniqueTeams.map((team, index) => (
             <option key={index} value={team}>

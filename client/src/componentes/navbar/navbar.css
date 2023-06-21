@@ -1,12 +1,25 @@
 .nav-container {
-  background-color: rgb(216, 196, 196);
-  height: 4rem;
+  
   display: flex;
+  align-items: center;
+  background-color: #0000006c;
+
 }
 
-.link-container {
+.buscador {
   display: flex;
-  justify-content: space-between;
+
+  /* align-items: center; */
   flex: 1;
   margin: 1rem;
+  border: 10px;
+ 
 }
+.buscador-click {
+  margin-right: 10px;
+
+  border-color: #ffffff;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+

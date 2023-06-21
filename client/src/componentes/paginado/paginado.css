@@ -3,20 +3,18 @@
   flex-wrap: wrap;
   justify-content: center;
   place-items: center;
-  margin-top: 1rem;
+
+  
 }
 
 .button {
-  width: 40px;
-  height: 40px;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 16px;
-  margin: 0 5px;
+ margin-top: 1rem;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
   background: transparent;
-  color: #eee;
-  border-color: #eee;
+
+  border-color: #000000;
+  text-decoration: none;
+  color: black;
 }

@@ -7,7 +7,7 @@ function Cards({ driver }) {
   const { id, forename, surname, image, teams, dob } = driver;
   return (
     <div className="card">
-      <Link to={`/driver/${id}`} className="text">
+      <Link to={`/driver/${id}`} className="texto">
         <h2>
           {forename} {surname}
         </h2>

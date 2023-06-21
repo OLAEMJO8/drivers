@@ -1,25 +1,12 @@
 body {
   background-size: cover;
+  background-color: black;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 50px 0;
+  text-decoration-color: black;
 }
 
-.navbar {
-  /* background-color: #ffffff;
-  color: #fff;
-  padding: 10px;
-  position: fixed;
-  width: 100%;
-  top: 0; */
-}
-.container {
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: flex-end;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-}

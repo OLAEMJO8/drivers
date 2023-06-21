@@ -21,8 +21,8 @@ function Detail() {
   return (
     <div>
 
-      <div >
-          <Link to="/home">Home</Link>
+      <div>
+          <Link  className="gohome" to="/home">Home</Link>
         </div>
     <div className="detail">
       {detail.hasOwnProperty("name") && (

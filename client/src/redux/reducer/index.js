@@ -22,7 +22,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allDrivers: action.payload, // [Drivers]
-        backUp: action.payload,
       };
     case GET_DETAIL:
       return {
@@ -37,7 +36,7 @@ function rootReducer(state = initialState, action) {
     case CLEAN_DETAIL:
       return {
         ...state,
-        clean: action.payload, // Limpiar el detalle
+        clean: [], // Limpiar el detalle
       };
     case ORDER_NAME:
       const sortedDrivers = [...state.allDrivers].sort((a, b) => {

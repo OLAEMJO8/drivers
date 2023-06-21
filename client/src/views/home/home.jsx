@@ -26,8 +26,6 @@ function Home() {
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = allDrivers.slice(firstPostIndex, lastPostIndex);
 
-  
-
   useEffect(() => {
     if (!allDrivers.length) {
       dispatch(getDrivers());
@@ -49,22 +47,20 @@ function Home() {
   const handleSortName = (e) => {
     e.preventDefault();
     dispatch(ordenarPorName(e.target.value));
-  
   };
   const handleSortDob = (e) => {
     e.preventDefault();
     dispatch(ordenarDob(e.target.value));
-    
   };
   const handleFilter = (e) => {
     e.preventDefault();
+
     dispatch(filtradoPorDriver(e.target.value));
-    
   };
 
   return (
     <div className="body">
-      <div className="navbar">
+      <div>
         <Navbar handleSubmit={handleSubmit} handleChange={handleChange} />
       </div>
       <div>
@@ -84,7 +80,7 @@ function Home() {
         />
       </div>
       <div>
-        <section className="container">
+        <section>
           <Cardlist allDrivers={currentPosts} />
         </section>
       </div>
