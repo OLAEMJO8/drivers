@@ -1,4 +1,4 @@
-import { all } from "axios";
+// import { all } from "axios";
 import React from "react";
 
 function Filtros({ handleSortName, handleSortDob, handleFilter, allDrivers }) {
