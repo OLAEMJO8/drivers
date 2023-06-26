@@ -1,15 +1,10 @@
 const { Driver } = require("../db");
-const {
-  postDriversController,
-} = require("../controllers/postDriversController");
+const { postDriversController } = require("../controllers/postDriversController");
 
-//!4
 const postDriversHandler = async (req, res) => {
   try {
-    const { id, forename, surname, description, image, nationality, dob, teams } =
-      req.body;
+    const { forename, surname, description, image, nationality, dob, teams } = req.body;
     const response = await postDriversController(
-      id,
       forename,
       surname,
       description,
@@ -19,9 +14,9 @@ const postDriversHandler = async (req, res) => {
       teams
     );
 
-    res.status(201).json(response);
+   return res.status(201).json(response);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(404).send({ error: error.message });
   }
 };
 

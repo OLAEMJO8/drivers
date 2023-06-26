@@ -1,25 +1,14 @@
-const { createPostDB, getPostsDB } = require("../controllers/getTeamsController");
+const { saveTeams } = require("../controllers/getTeamsController");
 
 const getTeamHandler = async (req, res) => {
   try {
-    const response = await getPostsDB();
+    const response = await saveTeams();
     res.status(200).json(response);
   } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
-
-const postTeamHandler = async (req, res) => {
-  const { teams, driverId} = req.body;
-  try {
-    const response = await createPostDB(teams, driverId);
-    res.status(200).json(response);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(404).send({ error: error.message });
   }
 };
 
 module.exports = {
   getTeamHandler,
-  postTeamHandler,
 };

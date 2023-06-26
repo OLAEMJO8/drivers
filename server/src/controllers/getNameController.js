@@ -6,7 +6,10 @@ const getDriverDB = async () => {
     const allDriver = await Driver.findAll({
       include: {
         model: Team,
-        attributes: ["id", "teams"],
+        attributes: ["teams"],
+        through: {
+          attributes: [],
+        },
       },
     });
     return allDriver;
@@ -31,7 +34,8 @@ const getDriverApi = async () => {
         image: driver.image.url || "http://bit.ly/3XlUDxl",
         nationality: driver.nationality,
         dob: driver.dob,
-        teams: driver.teams,
+        teams: driver.teams
+        
       };
     });
     return apiInfoMap;

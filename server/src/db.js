@@ -3,6 +3,7 @@ const { Sequelize } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
+
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 const sequelize = new Sequelize(
@@ -39,8 +40,8 @@ const { Driver, Team } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Driver.belongsToMany(Team, { through: "driverTeam" });
-Team.belongsToMany(Driver, { through: "driverTeam" });
+Driver.belongsToMany(Team, { through: "driver_team" });
+Team.belongsToMany(Driver, { through: "driver_team" });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

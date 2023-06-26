@@ -4,16 +4,11 @@ module.exports = (sequelize) => {
   sequelize.define(
     "Team",
     {
-      id: {
-        type: DataTypes.INTEGER, //Entero
-        primaryKey: true,
-        autoIncrement: true, // Autoincremento
-      },
       teams: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
     },
-    { timestamps: false, freezeTableName: true } // crear tabla en singular
+    { timestamps: false} // crear tabla en singular
   );
 };

@@ -47,14 +47,17 @@ function Home() {
   const handleSortName = (e) => {
     e.preventDefault();
     dispatch(ordenarPorName(e.target.value));
+    setCurrentPage(1)
   };
   const handleSortDob = (e) => {
     e.preventDefault();
     dispatch(ordenarDob(e.target.value));
+    setCurrentPage(1)
   };
   const handleFilter = (e) => {
     e.preventDefault(),
     dispatch(filtradoPorDriver(e.target.value));
+    setCurrentPage(1)
   };
 
   return (

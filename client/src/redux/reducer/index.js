@@ -14,7 +14,6 @@ let initialState = {
   detail: [],
   clean: [],
   // drivers: [],
-
 };
 
 function rootReducer(state = initialState, action) {
@@ -63,15 +62,21 @@ function rootReducer(state = initialState, action) {
       };
 
     case FILTRO_POR_DRIVER:
-      const filtro = Object.values(state.allDrivers).filter((driver) =>
-        driver.teams?.includes(action.payload)
-      );
+      if (action.payload === "allDrivers") {
+        return {
+          ...state,
+          allDrivers: state.backUp,
+        };
+      } else {
+        const filtro = Object.values(state.allDrivers).filter((driver) =>
+          driver.teams?.includes(action.payload)
+        );
 
-      return {
-        ...state,
-        allDrivers: filtro,
-      };
-
+        return {
+          ...state,
+          allDrivers: filtro,
+        };
+      }
     default:
       return state;
   }

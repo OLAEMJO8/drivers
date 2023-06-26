@@ -6,8 +6,9 @@ const getIdController = async (id) => {
     const user = await Driver.findByPk(id);
     return user;
   }
-  const user = (await axios.get(`http://localhost:5000/drivers/${id}`)).data;
+  const response = await axios.get(`http://localhost:5000/drivers/${id}`);
+  const user = response.data;
   return user;
 };
 
-module.exports = {getIdController};
+module.exports = { getIdController };
