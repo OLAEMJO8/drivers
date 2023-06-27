@@ -31,11 +31,10 @@ const getDriverApi = async () => {
         forename: driver.name.forename,
         surname: driver.name.surname,
         description: driver.description,
-        image: driver.image.url || "http://bit.ly/3XlUDxl",
+        image: driver.image.url,
         nationality: driver.nationality,
         dob: driver.dob,
-        teams: driver.teams
-        
+        teams: driver.teams,
       };
     });
     return apiInfoMap;

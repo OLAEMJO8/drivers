@@ -1,10 +1,20 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import imagen from "../card/imagenes/imagen.jpg";
-
 import "./card.css";
 
 function Cards({ driver }) {
-  const { id, forename, surname, image, teams, dob } = driver;
+  const { id, forename, surname, image, dob, teams } = driver;
+
+  let teamsDb;
+  if (Array.isArray(driver.Teams)) {
+    teamsDb = driver.Teams.map((team, index) => (
+      <p key={index}>{team.teams}</p>
+    ));
+  } else {
+    teamsDb = <p>{driver.Teams}</p>;
+  }
+
   return (
     <div className="card">
       <Link to={`/driver/${id}`} className="texto">
@@ -12,11 +22,10 @@ function Cards({ driver }) {
           {forename} {surname}
         </h2>
         <div>
-        <img src={image} alt={`${forename}`} className="img" /> 
-            
+          <img src={image} alt={forename} className="img" />
         </div>
-        <h2>Equipo:</h2>
-        <h3>{teams}</h3>
+        <h2>Equipos:</h2>
+        {teamsDb} {teams}
         <h3>Nacimiento:</h3>
         <h3>{dob}</h3>
       </Link>
