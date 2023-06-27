@@ -41,10 +41,15 @@ const saveTeams = async () => {
     if (dbTeams.length === 0) {
       const allTeams = await getTeamsDB();
 
-      if (!allTeams) throw new Error("no hay equipos");
+      if (!allTeams) throw new Error("No hay equipos");
 
-      await Team.bulkCreate(allTeams);
-      return allTeams;
+      // Verificar y filtrar equipos duplicados
+      const uniqueTeams = allTeams.filter(
+        (team) => !dbTeams.some((dbTeam) => dbTeam.name === team.teams)
+      );
+
+      await Team.bulkCreate(uniqueTeams);
+      return uniqueTeams;
     } else {
       return dbTeams;
     }
@@ -52,6 +57,7 @@ const saveTeams = async () => {
     return { error: error.message };
   }
 };
+
 
 module.exports = {
   saveTeams,

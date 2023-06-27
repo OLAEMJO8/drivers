@@ -8,6 +8,7 @@ export const GET_DRIVERS_BY_NAME = "GET_DRIVERS_BY_NAME";
 export const ORDER_NAME = "ORDER_NAME";
 export const ORDER_DOB = "ORDER_DOB";
 export const FILTRO_POR_DRIVER = "FILTRO_POR_DRIVER";
+export const GET_TEAMS = "GET_TEAMS";
 export const getDrivers = () => {
   return async function (dispatch) {
     try {
@@ -89,3 +90,9 @@ export const filtradoPorDriver = (teams) => {
   };
 };
 
+export const getTeams = () => {
+  return async function (dispatch) {
+    const response = await axios.get("http://localhost:3001/teams");
+    dispatch({ type: GET_TEAMS, payload: response.data });
+  };
+};

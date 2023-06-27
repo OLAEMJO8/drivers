@@ -6,6 +6,7 @@ import {
   ORDER_NAME,
   ORDER_DOB,
   FILTRO_POR_DRIVER,
+  GET_TEAMS,
 } from "../action";
 
 let initialState = {
@@ -13,7 +14,7 @@ let initialState = {
   backUp: [],
   detail: [],
   clean: [],
-  // drivers: [],
+  teams: [], 
 };
 
 function rootReducer(state = initialState, action) {
@@ -21,23 +22,28 @@ function rootReducer(state = initialState, action) {
     case GET_DRIVERS:
       return {
         ...state,
-        allDrivers: action.payload, // [Drivers]
+        allDrivers: action.payload,
         backUp: action.payload,
       };
     case GET_DETAIL:
       return {
         ...state,
-        detail: action.payload, // [Drivers]
+        detail: action.payload,
       };
     case GET_DRIVERS_BY_NAME:
       return {
         ...state,
-        allDrivers: action.payload, // search
+        allDrivers: action.payload,
+      };
+    case GET_TEAMS:
+      return {
+        ...state,
+        teams: action.payload,
       };
     case CLEAN_DETAIL:
       return {
         ...state,
-        clean: [], // Limpiar el detalle
+        clean: [],
       };
     case ORDER_NAME:
       const sortedDrivers = [...state.allDrivers].sort((a, b) => {
@@ -49,7 +55,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         allDrivers: sortedDrivers,
       };
-
     case ORDER_DOB:
       const sortedDriversDob = [...state.allDrivers].sort((a, b) => {
         return action.payload === "asc"
@@ -60,7 +65,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         allDrivers: sortedDriversDob,
       };
-
     case FILTRO_POR_DRIVER:
       if (action.payload === "allDrivers") {
         return {
@@ -71,7 +75,6 @@ function rootReducer(state = initialState, action) {
         const filtro = Object.values(state.allDrivers).filter((driver) =>
           driver.teams?.includes(action.payload)
         );
-
         return {
           ...state,
           allDrivers: filtro,
