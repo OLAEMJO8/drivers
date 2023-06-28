@@ -41,23 +41,25 @@ function Home() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(getDriversByName(search));
+    
+      dispatch(getDriversByName(search));
+    
   };
 
   const handleSortName = (e) => {
     e.preventDefault();
     dispatch(ordenarPorName(e.target.value));
-    setCurrentPage(1)
+    setCurrentPage(1);
   };
   const handleSortDob = (e) => {
     e.preventDefault();
     dispatch(ordenarDob(e.target.value));
-    setCurrentPage(1)
+    setCurrentPage(1);
   };
   const handleFilter = (e) => {
-    e.preventDefault(),
+    e.preventDefault();
     dispatch(filtradoPorDriver(e.target.value));
-    setCurrentPage(1)
+    setCurrentPage(1);
   };
 
   return (
@@ -71,7 +73,6 @@ function Home() {
           handleFilter={handleFilter}
           handleSortName={handleSortName}
           handleSortDob={handleSortDob}
-
         />
       </div>
       <div>
@@ -83,10 +84,14 @@ function Home() {
         />
       </div>
       <div>
-        <section>
-          <Cardlist allDrivers={currentPosts} />
-        </section>
-      </div>
+  <section>
+    {currentPosts.length === 0 ? (
+      <p>No se encontraron conductores.</p>
+    ) : (
+      <Cardlist allDrivers={currentPosts} />
+    )}
+  </section>
+</div>
     </div>
   );
 }

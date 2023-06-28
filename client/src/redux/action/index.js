@@ -38,16 +38,31 @@ export const getDetail = (id) => {
     }
   };
 };
+
 export const postDrivers = (info) => {
   return async function (dispatch) {
     try {
+      // Verificación
+      if (
+        info.forename === "" ||
+        info.surname === "" ||
+        info.nationality === "" ||
+        info.image === "" ||
+        info.dob === "" ||
+        info.description === "" ||
+        info.teams.length === 0
+      ) {
+        throw new Error("Faltan datos");
+      }
+
       const response = await axios.post("http://localhost:3001/drivers", info);
       alert("Corredor creado");
     } catch (error) {
-      alert("Faltan datos");
+      alert(error.message); 
     }
   };
 };
+
 
 export const getDriversByName = (forename) => {
   return async function (dispatch) {
