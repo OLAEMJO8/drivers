@@ -16,7 +16,7 @@ function Create() {
   }, []);
 
   const teamsTraer = useSelector((state) => state.teams);
-
+  
   const [state, setState] = useState({
     forename: "",
     surname: "",
@@ -36,44 +36,7 @@ function Create() {
     teams: "Equipos",
   });
 
-  const validate = (input, name) => {
-    if (name === "forename") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        forename: input.forename !== "" ? "" : "Nombre requerido",
-      }));
-    }
-    if (name === "surname") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        surname: input.surname !== "" ? "" : "Apellido requerido",
-      }));
-    }
-    if (name === "nationality") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        nationality: input.nationality !== "" ? "" : "Nacionalidad requerida",
-      }));
-    }
-    if (name === "image") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        image: input.image !== "" ? "" : "Imagen requerida",
-      }));
-    }
-    if (name === "dob") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        dob: input.dob !== "" ? "" : "Fecha requerida (formato aaaa/mm/dd)",
-      }));
-    }
-    if (name === "description") {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        description: input.description !== "" ? "" : "Descripcion requerida",
-      }));
-    }
-  };
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -85,7 +48,10 @@ function Create() {
 
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: value !== "" ? "" : `${name[0].toUpperCase() + name.slice(1)} requerido`,
+      [name]:
+        value !== ""
+          ? ""
+          : `${name[0].toUpperCase() + name.slice(1)} requerido`,
     }));
   };
 
@@ -99,28 +65,27 @@ function Create() {
       image: "",
       dob: "",
       description: "",
-      teams: "",
+      teams: [],
     });
   };
 
   const handleSelect = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions);
-    const selectedValues = selectedOptions.map((option) => Number(option.value));
+    const selectedValues = selectedOptions.map((option) =>
+      Number(option.value)
+    );
     const selectedNames = selectedOptions.map((option) => option.title);
     setState((prevState) => ({
       ...prevState,
-      [event.target.name]: selectedValues,
+      teams: selectedValues,
       teamsName: selectedNames.join(", "),
     }));
-  
+
     setErrors((prevErrors) => ({
       ...prevErrors,
       teams: selectedValues.length > 0 ? "" : "Equipos requeridos",
     }));
-  
-    return selectedValues;
   };
-  
 
   return (
     <div className="body">
@@ -130,36 +95,71 @@ function Create() {
         </div>
         <div>
           <label>Nombre</label>
-          <input type="text" name="forename" value={state.forename} onChange={handleChange} />
+          <input
+            type="text"
+            name="forename"
+            value={state.forename}
+            onChange={handleChange}
+          />
           {errors.forename && <span>{errors.forename}</span>}
         </div>
         <div>
           <label>Apellido</label>
-          <input type="text" name="surname" value={state.surname} onChange={handleChange} />
+          <input
+            type="text"
+            name="surname"
+            value={state.surname}
+            onChange={handleChange}
+          />
           {errors.surname && <span>{errors.surname}</span>}
         </div>
         <div>
           <label>Nacionalidad</label>
-          <input type="text" name="nationality" value={state.nationality} onChange={handleChange} />
+          <input
+            type="text"
+            name="nationality"
+            value={state.nationality}
+            onChange={handleChange}
+          />
           {errors.nationality && <span>{errors.nationality}</span>}
         </div>
         <div>
           <label>Imagen</label>
-          <input type="url" name="image" value={state.image} onChange={handleChange} />
+          <input
+            type="url"
+            name="image"
+            value={state.image}
+            onChange={handleChange}
+          />
           {errors.image && <span>{errors.image}</span>}
         </div>
         <div>
           <label>Fecha de Nacimiento</label>
-          <input type="date" name="dob" value={state.dob} onChange={handleChange} />
+          <input
+            type="date"
+            name="dob"
+            value={state.dob}
+            onChange={handleChange}
+          />
           {errors.dob && <span>{errors.dob}</span>}
         </div>
         <div>
           <label>Descripcion</label>
-          <input type="text" name="description" value={state.description} onChange={handleChange} />
+          <input
+            type="text"
+            name="description"
+            value={state.description}
+            onChange={handleChange}
+          />
           {errors.description && <span>{errors.description}</span>}
         </div>
         <label>Equipos:</label>
-        <select name="teams" value={state.teams} onChange={handleSelect} multiple>
+        <select
+          name="teams"
+          value={state.teams}
+          onChange={handleSelect}
+          multiple
+        >
           {teamsTraer?.map((t) => (
             <option title={t.teams} value={t.id} key={t.id}>
               {t.teams}
