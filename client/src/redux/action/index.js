@@ -58,11 +58,10 @@ export const postDrivers = (info) => {
       const response = await axios.post("http://localhost:3001/drivers", info);
       alert("Corredor creado");
     } catch (error) {
-      alert(error.message); 
+      alert(error.message);
     }
   };
 };
-
 
 export const getDriversByName = (forename) => {
   return async function (dispatch) {

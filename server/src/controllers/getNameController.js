@@ -45,16 +45,20 @@ const getDriverApi = async () => {
 
 const getNameController = async (forename) => {
   try {
-    const driverDB = await getDriverDB(); //todos los usuarios de la DB
-    const driverApi = await getDriverApi(); //todos los usuarios de la API
-    const allDrivers = [...driverDB, ...driverApi]; //todos los USUARIOS
+    const driverDB = await getDriverDB(); // todos los usuarios de la DB
+    const driverApi = await getDriverApi(); // todos los usuarios de la API
+    const allDrivers = [...driverDB, ...driverApi]; // todos los USUARIOS
 
     if (forename) {
-      let filterDriver = allDrivers.filter((driver) =>
+      const filterDriver = allDrivers.filter((driver) =>
         driver.forename.toLowerCase().includes(forename.toLowerCase())
       );
       if (filterDriver.length) {
         return filterDriver;
+      } else {
+        throw new Error(
+          "No se encontraron conductores con el forename especificado."
+        );
       }
     } else {
       return allDrivers;
